@@ -112,7 +112,7 @@ class User
         return $this;
     }
 
-    public function getHeight(): ?string
+    public function getHeight(): ?int
     {
         return $this->height;
     }

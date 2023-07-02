@@ -5,7 +5,18 @@
 {% block body %}
     <h1>Create new User</h1>
 
-    {{ include('user/_form.html.twig') }}
+    {{ form_start(form) }}
+        {# {{ form_widget(form) }} #}
+
+        {{ form_row(form.nom, {"attr" : { "data-ehe" : "ehe","style" : "display:initial"} , "label" : "Nom complet : ","label_attr" :{"class": "col-sm-2"}  } ) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.age) }}
+        {{ form_row(form.CIN) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.height) }}
+
+        <button class="btn btn-info ">{{ button_label|default('Save') }}</button>
+    {{ form_end(form,{render_rest: false}) }}
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 {% endblock %}
