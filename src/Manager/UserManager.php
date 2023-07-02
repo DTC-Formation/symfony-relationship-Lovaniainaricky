@@ -8,11 +8,11 @@ use Doctrine\ORM\EntityRepository;
 
 class UserManager 
 {
-    private $entitymanager;
+    private $entityManager;
 
-    public function __construct(EntityManagerInterface $entitymanager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->entitymanager = $entitymanager;
+        $this->entityManager = $entityManager;
     }
 
     // utiliser add edit delete de ce class et ne plus utiliser userRepository
@@ -20,26 +20,31 @@ class UserManager
     public function add(User $entity, bool $flush = false): void
     {
         $entity = new User();
-        $this->entitymanager->persist($entity);
+        $this->entityManager->persist($entity);
 
         if ($flush) {
-            $this->entitymanager->flush();
+            $this->entityManager->flush();
         }
+
+        return;
     }
 
     public function remove(User $entity, bool $flush = false): void
     {
-        $this->entitymanager->remove($entity);
+        $this->entityManager->remove($entity);
 
         if ($flush) {
-            $this->entitymanager->flush();
+            $this->entityManager->flush();
         }
+
+        return;
     }
 
     public function findAll() : array 
     {
-        $repository = $this->entitymanager->getRepository(User::class);
+        $repository = $this->entityManager->getRepository(User::class);
         $findAll =  $repository->findAll();
+
         return $findAll;
     }
     

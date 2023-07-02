@@ -47,6 +47,11 @@ class User
      */
     private $height;
 
+    /**
+     * @ORM\Column(type="float", length=11)
+     */
+    private $weight;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,9 +122,21 @@ class User
         return $this->height;
     }
 
-    public function setHeight(string $height): self
+    public function setHeight(?int $height): self
     {
         $this->height = $height;
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }
