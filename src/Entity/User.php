@@ -18,7 +18,7 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
 
@@ -33,22 +33,22 @@ class User
     private $age;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $CIN;
 
     /**
-     * @ORM\Column(type="string", length=1050)
+     * @ORM\Column(type="string", length=1050, nullable=true)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="float", length=11)
+     * @ORM\Column(type="float", length=11, nullable=true)
      */
     private $height;
 
     /**
-     * @ORM\Column(type="float", length=11)
+     * @ORM\Column(type="float", length=11, nullable=true)
      */
     private $weight;
 

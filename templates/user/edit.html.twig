@@ -5,7 +5,19 @@
 {% block body %}
     <h1>Edit User</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    {{ form_start(form) }}
+        {# {{ form_widget(form) }} #}
+
+        {{ form_row(form.nom, {"attr" : { "data-ehe" : "ehe","style" : "display:initial"} , "label" : "Nom complet : ","label_attr" :{"class": ""}  } ) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.age) }}
+        {{ form_row(form.CIN) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.height) }}
+        {{ form_widget(form._token) }}
+        
+        <button class="btn btn-info ">{{ button_label|default('Save Edit') }}</button>
+    {{ form_end(form,{render_rest: false}) }}
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
