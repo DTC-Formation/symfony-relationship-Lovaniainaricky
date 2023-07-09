@@ -29,8 +29,8 @@
                 <td>{{ user.adresse }}</td>
                 <td>{{ user.height }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('app_user_show', {'id': user.id}) }}"><i class="fa-solid fa-eye fa-bounce"></i></a>
+                    <a class="btn btn-sm btn-warning" href="{{ path('app_user_edit', {'id': user.id}) }}"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% else %}
