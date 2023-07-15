@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TrainingResponseController!{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{{ path('download_book') }}"> 
+                <button class="btn btn-success my-3">
+                Download Book 
+                </button>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{{ path('download_redirection') }}"> 
+                <button class="btn btn-danger my-3">
+                register Now 
+                </button>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{{ path('telecharger_api') }}"> 
+                <button class="btn btn-info my-3">
+                Get API 
+                </button>
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
