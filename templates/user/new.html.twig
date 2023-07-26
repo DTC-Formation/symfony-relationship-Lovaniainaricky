@@ -18,30 +18,30 @@
 
         {# Afficher le formulaire imbriqué pour les expériences #}
         <div id="etude">
-            {% for etudeForm in form.etudes %}
+            {# {% for etudeForm in form.etudes %}
                 <fieldset>
                     <legend>Expérience {{ loop.index }}</legend>
                     {{ form_row(etudeForm.Post) }}
                     {{ form_row(etudeForm.startDate) }}
                     {{ form_row(etudeForm.endDate) }}
                 </fieldset>
-            {% endfor %}
+            {% endfor %} #}
         </div>
 
-        <button type="btn btn-info " id="add_etude">Ajouter une expérience</button>
+        {# <button type="btn btn-info " id="add_etude">Ajouter une Etude</button> #}
 
 
         <div id="experience">
-            {% for experienceForm in form.experiences %}
+            {# {% for experienceForm in form.experiences %}
                 <fieldset>
                     <legend>Expérience {{ loop.index }}</legend>
                     {{ form_row(experienceForm.Post) }}
                     {{ form_row(experienceForm.startDate) }}
                     {{ form_row(experienceForm.EndDate) }}
                 </fieldset>
-            {% endfor %}
+            {% endfor %} #}
         </div>
-        <button type="btn btn-info " id="add_experience">Ajouter une Etude</button>
+        {# <button type="btn btn-info " id="add_experience">Ajouter une Experience</button> #}
 
         
 
@@ -50,7 +50,7 @@
 
         {{ form_widget(form._token) }}
 
-        <button class="btn btn-info " type="button">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-info " type="submit">{{ button_label|default('Save') }}</button>
         <div id="etude_template" style="display: none">
             <fieldset>
                 <legend>Etude __name__</legend>
@@ -67,7 +67,7 @@
                 {{ form_row(form.experiences.vars.prototype.EndDate) }}
             </fieldset>
         </div>
-    {{ form_end(form) }}
+    {{ form_end(form,{render_rest: false}) }}
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
@@ -75,12 +75,12 @@
     <script>
         // Script pour gérer l'ajout dynamique de nouvelles expériences
         document.getElementById('add_etude').addEventListener('click', function() {
-            var index = document.querySelectorAll('fieldset').length;
+            var index = document.querySelectorAll('#etude_template fieldset').length;
             var template = document.getElementById('etude_template').innerHTML.replace(/__name__/g, index);
             document.getElementById('etude').insertAdjacentHTML('beforeend', template);
         });
         document.getElementById('add_experience').addEventListener('click', function() {
-            var index = document.querySelectorAll('fieldset').length;
+            var index = document.querySelectorAll('#experience_template fieldset').length;
             var template = document.getElementById('experience_template').innerHTML.replace(/__nameexp__/g, index);
             document.getElementById('experience').insertAdjacentHTML('beforeend', template);
         });
