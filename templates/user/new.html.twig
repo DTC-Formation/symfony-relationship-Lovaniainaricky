@@ -14,11 +14,75 @@
         {{ form_row(form.CIN) }}
         {{ form_row(form.adresse) }}
         {{ form_row(form.height) }}
+        {{ form_row(form.weight) }}
+
+        {# Afficher le formulaire imbriqué pour les expériences #}
+        <div id="etude">
+            {% for etudeForm in form.etudes %}
+                <fieldset>
+                    <legend>Expérience {{ loop.index }}</legend>
+                    {{ form_row(etudeForm.Post) }}
+                    {{ form_row(etudeForm.startDate) }}
+                    {{ form_row(etudeForm.endDate) }}
+                </fieldset>
+            {% endfor %}
+        </div>
+
+        <button type="btn btn-info button" id="add_etude">Ajouter une expérience</button>
+
+
+        <div id="experience">
+            {% for experienceForm in form.experiences %}
+                <fieldset>
+                    <legend>Expérience {{ loop.index }}</legend>
+                    {{ form_row(experienceForm.Post) }}
+                    {{ form_row(experienceForm.startDate) }}
+                    {{ form_row(experienceForm.EndDate) }}
+                </fieldset>
+            {% endfor %}
+        </div>
+        <button type="btn btn-info button" id="add_experience">Ajouter une Etude</button>
+
+        
+
+        <!-- Template HTML caché pour l'ajout dynamique -->
+        
 
         {{ form_widget(form._token) }}
 
-        <button class="btn btn-info ">{{ button_label|default('Save') }}</button>
-    {{ form_end(form,{render_rest: false}) }}
+        <button class="btn btn-info " type="button">{{ button_label|default('Save') }}</button>
+        <div id="etude_template" style="display: none">
+            <fieldset>
+                <legend>Etude __name__</legend>
+                {{ form_row(form.etudes.vars.prototype.Post) }}
+                {{ form_row(form.etudes.vars.prototype.startDate) }}
+                {{ form_row(form.etudes.vars.prototype.endDate) }}
+            </fieldset>
+        </div>
+        <div id="experience_template" style="display: none">
+            <fieldset>
+                <legend>Experience __nameexp__</legend>
+                {{ form_row(form.experiences.vars.prototype.Post) }}
+                {{ form_row(form.experiences.vars.prototype.startDate) }}
+                {{ form_row(form.experiences.vars.prototype.EndDate) }}
+            </fieldset>
+        </div>
+    {{ form_end(form) }}
 
     <a href="{{ path('app_user_index') }}">back to list</a>
+
+
+    <script>
+        // Script pour gérer l'ajout dynamique de nouvelles expériences
+        document.getElementById('add_etude').addEventListener('click', function() {
+            var index = document.querySelectorAll('fieldset').length;
+            var template = document.getElementById('etude_template').innerHTML.replace(/__name__/g, index);
+            document.getElementById('etude').insertAdjacentHTML('beforeend', template);
+        });
+        document.getElementById('add_experience').addEventListener('click', function() {
+            var index = document.querySelectorAll('fieldset').length;
+            var template = document.getElementById('experience_template').innerHTML.replace(/__nameexp__/g, index);
+            document.getElementById('experience').insertAdjacentHTML('beforeend', template);
+        });
+    </script>
 {% endblock %}

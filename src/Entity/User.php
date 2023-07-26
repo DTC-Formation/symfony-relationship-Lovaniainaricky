@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,22 @@ class User
      * @ORM\Column(type="float", length=11, nullable=true)
      */
     private $weight;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="user")
+     */
+    private $experiences;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etudes::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $etudes;
+
+    public function __construct()
+    {
+        $this->experiences = new ArrayCollection();
+        $this->etudes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +155,66 @@ class User
     public function setWeight(?int $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Experience $experience): self
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences[] = $experience;
+            $experience->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): self
+    {
+        if ($this->experiences->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getUser() === $this) {
+                $experience->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etudes>
+     */
+    public function getEtudes(): Collection
+    {
+        return $this->etudes;
+    }
+
+    public function addEtude(Etudes $etude): self
+    {
+        if (!$this->etudes->contains($etude)) {
+            $this->etudes[] = $etude;
+            $etude->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtude(Etudes $etude): self
+    {
+        if ($this->etudes->removeElement($etude)) {
+            // set the owning side to null (unless already changed)
+            if ($etude->getUser() === $this) {
+                $etude->setUser(null);
+            }
+        }
 
         return $this;
     }

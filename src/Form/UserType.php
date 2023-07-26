@@ -2,54 +2,68 @@
 
 namespace App\Form;
 
+use App\Entity\Etudes;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Collection;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom',TextType::class, [
-                "attr" => [
-                    "class" => "form-control col-sm-9",
-                    "placeholder" => "atsofoy ny nom anao"
+            ->add('nom' ,TextType::class,[
+                'attr' => [
+
+                    'class' => 'form-control',
                 ]
             ])
-            ->add('prenom',TextType::class, [
-                "attr" => [
-                    "class" => "form-control",
-                    "placeholder" => "atsofoy ny prenom anao"
+            ->add('prenom',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('age',TextType::class, [
-                "attr" => [
-                    "class" => "form-control",
-                    "placeholder" => "atsofoy ny age anao"
+            ->add('age',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('CIN',TextType::class, [
-                "attr" => [
-                    "class" => "form-control",
-                    "placeholder" => "atsofoy ny CIN anao"
+            ->add('CIN',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('adresse',TextType::class, [
-                "attr" => [
-                    "class" => "form-control",
-                    "placeholder" => "atsofoy ny adresse anao"
+            ->add('adresse',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('height',NumberType::class, [
-                "attr" => [
-                    "class" => "height-input form-control",
-                    "placeholder" => "atsofoy ny metatra anao",
-                    'input' => 'number'
+            ->add('height',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
                 ]
+            ])
+            ->add('weight',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('etudes', CollectionType::class, [
+                'entry_type' => EtudesType::class, // Le formulaire pour chaque élément de la collection
+                'allow_add' => true, // Autoriser l'ajout de nouveaux éléments à la collection
+                'allow_delete' => true, // Autoriser la suppression d'éléments de la collection
+                'by_reference' => false, // Important pour les relations "OneToMany" et "ManyToMany"
+            ])
+            ->add('experiences', CollectionType::class,[
+                'entry_type' => ExperienceType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ])
         ;
     }
