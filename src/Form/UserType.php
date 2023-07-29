@@ -44,14 +44,19 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('height',TextType::class,[
+                'label' => 'Longueur ',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('weight',TextType::class,[
+                'label' => 'Poids ',
                 'attr' => [
                     'class' => 'form-control'
                 ]
+            ])
+            ->add('contact', ContactType::class,[
+                
             ])
             ->add('etudes', CollectionType::class, [
                 'entry_type' => EtudesType::class, // Le formulaire pour chaque élément de la collection

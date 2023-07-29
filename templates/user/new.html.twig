@@ -7,41 +7,54 @@
 
     {{ form_start(form) }}
         {# {{ form_widget(form) }} #}
+        <div class="row">
+            <div class=" col-sm-6">
+                {{ form_row(form.nom, {"attr" : { "data-ehe" : "ehe","style" : "display:initial"} , "label" : "Nom complet : ","label_attr" :{"class": "col-sm-2"}  } ) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.age) }}
+                {{ form_row(form.CIN) }}
+                {{ form_row(form.adresse) }}
+                {{ form_row(form.height) }}
+                {{ form_row(form.weight) }}
+                <h2>Contact</h2>
+                {{ form_row(form.contact.telephone) }}
+                {{ form_row(form.contact.mail) }}
+                {{ form_row(form.contact.linkedIn) }}
+            </div>
+            <div class="col-sm-6">
+                {# Afficher le formulaire imbriqué pour les expériences #}
+                <div id="etude">
+                    {% for etudeForm in form.etudes %}
+                        <fieldset>
+                            <legend>Expérience {{ loop.index }}</legend>
+                            {{ form_row(etudeForm.Post) }}
+                            <div class="col-sm-6">
+                            {{ form_row(etudeForm.startDate) }}
+                            </div>
+                            <div class="col-sm-6">
+                            {{ form_row(etudeForm.endDate) }}
+                            </div>
+                        </fieldset>
+                    {% endfor %}
+                </div>
 
-        {{ form_row(form.nom, {"attr" : { "data-ehe" : "ehe","style" : "display:initial"} , "label" : "Nom complet : ","label_attr" :{"class": "col-sm-2"}  } ) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.age) }}
-        {{ form_row(form.CIN) }}
-        {{ form_row(form.adresse) }}
-        {{ form_row(form.height) }}
-        {{ form_row(form.weight) }}
+                <button class="btn btn-info my-3" id="add_etude">Ajouter une Etude</button>
 
-        {# Afficher le formulaire imbriqué pour les expériences #}
-        <div id="etude">
-            {# {% for etudeForm in form.etudes %}
-                <fieldset>
-                    <legend>Expérience {{ loop.index }}</legend>
-                    {{ form_row(etudeForm.Post) }}
-                    {{ form_row(etudeForm.startDate) }}
-                    {{ form_row(etudeForm.endDate) }}
-                </fieldset>
-            {% endfor %} #}
+
+                <div id="experience">
+                    {% for experienceForm in form.experiences %}
+                        <fieldset>
+                            <legend>Expérience {{ loop.index }}</legend>
+                            {{ form_row(experienceForm.Post) }}
+                            {{ form_row(experienceForm.startDate) }}
+                            {{ form_row(experienceForm.EndDate) }}
+                        </fieldset>
+                    {% endfor %}
+                </div>
+                <button class="btn btn-info my-3" id="add_experience">Ajouter une Experience</button>
+            </div>
         </div>
 
-        {# <button type="btn btn-info " id="add_etude">Ajouter une Etude</button> #}
-
-
-        <div id="experience">
-            {# {% for experienceForm in form.experiences %}
-                <fieldset>
-                    <legend>Expérience {{ loop.index }}</legend>
-                    {{ form_row(experienceForm.Post) }}
-                    {{ form_row(experienceForm.startDate) }}
-                    {{ form_row(experienceForm.EndDate) }}
-                </fieldset>
-            {% endfor %} #}
-        </div>
-        {# <button type="btn btn-info " id="add_experience">Ajouter une Experience</button> #}
 
         
 
@@ -50,26 +63,38 @@
 
         {{ form_widget(form._token) }}
 
-        <button class="btn btn-info " type="submit">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-info my-3" type="submit">{{ button_label|default('Save') }}</button>
+    {{ form_end(form,{render_rest: false}) }}
         <div id="etude_template" style="display: none">
             <fieldset>
                 <legend>Etude __name__</legend>
                 {{ form_row(form.etudes.vars.prototype.Post) }}
-                {{ form_row(form.etudes.vars.prototype.startDate) }}
-                {{ form_row(form.etudes.vars.prototype.endDate) }}
+                <div class="row">
+                    <div class="col-sm-6">
+                    {{ form_row(form.etudes.vars.prototype.startDate) }}
+                    </div>
+                    <div class="col-sm-6">
+                    {{ form_row(form.etudes.vars.prototype.endDate) }}
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div id="experience_template" style="display: none">
             <fieldset>
                 <legend>Experience __nameexp__</legend>
                 {{ form_row(form.experiences.vars.prototype.Post) }}
-                {{ form_row(form.experiences.vars.prototype.startDate) }}
-                {{ form_row(form.experiences.vars.prototype.EndDate) }}
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ form_row(form.experiences.vars.prototype.startDate) }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form_row(form.experiences.vars.prototype.EndDate) }}
+                    </div>
+                </div>
             </fieldset>
         </div>
-    {{ form_end(form,{render_rest: false}) }}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+    <a class="btn btn-warning" href="{{ path('app_user_index') }}"><i class="fa fa-arrow-left"></i> back to list</a>
 
 
     <script>

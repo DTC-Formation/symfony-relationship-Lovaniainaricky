@@ -64,6 +64,11 @@ class User
      */
     private $etudes;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Contact::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $contact;
+
     public function __construct()
     {
         $this->experiences = new ArrayCollection();
@@ -215,6 +220,28 @@ class User
                 $etude->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($contact === null && $this->contact !== null) {
+            $this->contact->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($contact !== null && $contact->getUser() !== $this) {
+            $contact->setUser($this);
+        }
+
+        $this->contact = $contact;
 
         return $this;
     }
