@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\EtudesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=EtudesRepository::class)
@@ -19,16 +21,19 @@ class Etudes
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("listing","creating")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("listing","creating")
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("listing","creating")
      */
     private $Post;
 

@@ -70,13 +70,14 @@ class UserManager
     }
 
     public function SaveUser($user) : void {
-        // foreach ($user->getExperiences() as $experience) {
-        //     $this->entityManager->persist($experience);
-        // }
 
-        // foreach ($user->getEtudes() as $education) {
-        //     $this->entityManager->persist($education);
-        // }
+        foreach ($user->getExperiences() as $experience) {
+            $this->entityManager->persist($experience);
+        }
+
+        foreach ($user->getEtudes() as $education) {
+            $this->entityManager->persist($education);
+        }
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

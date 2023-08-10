@@ -7,16 +7,48 @@
 
     {{ form_start(form) }}
         {# {{ form_widget(form) }} #}
+         <div class="row">
+            <div class=" col-sm-6">
+                {{ form_row(form.nom, {"attr" : { "data-ehe" : "ehe","style" : "display:initial"} , "label" : "Nom complet : ","label_attr" :{"class": ""}  } ) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.age) }}
+                {{ form_row(form.CIN) }}
+                {{ form_row(form.adresse) }}
+                {{ form_row(form.height) }}
+                {{ form_row(form.weight) }}
+                <h2>Contact</h2>
+                {{ form_row(form.contact.telephone) }}
+                {{ form_row(form.contact.mail) }}
+                {{ form_row(form.contact.linkedIn) }}
 
-        {{ form_row(form.nom, {"attr" : { "data-ehe" : "ehe","style" : "display:initial"} , "label" : "Nom complet : ","label_attr" :{"class": ""}  } ) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.age) }}
-        {{ form_row(form.CIN) }}
-        {{ form_row(form.adresse) }}
-        {{ form_row(form.height) }}
-        {{ form_row(form.weight) }}
-        {{ form_widget(form._token) }}
-        
+                {{ form_widget(form._token) }}
+            </div>
+            <div class="col-sm-6">
+                <div id="etude">
+                    {% for etudeForm in form.etudes %}
+                        <fieldset>
+                            <legend>Expérience {{ loop.index }}</legend>
+                            {{ form_row(etudeForm.Post) }}
+                            <div class="col-sm-6">
+                            {{ form_row(etudeForm.startDate) }}
+                            </div>
+                            <div class="col-sm-6">
+                            {{ form_row(etudeForm.endDate) }}
+                            </div>
+                        </fieldset>
+                    {% endfor %}
+                </div>
+                <div id="experience">
+                    {% for experienceForm in form.experiences %}
+                        <fieldset>
+                            <legend>Expérience {{ loop.index }}</legend>
+                            {{ form_row(experienceForm.Post) }}
+                            {{ form_row(experienceForm.startDate) }}
+                            {{ form_row(experienceForm.EndDate) }}
+                        </fieldset>
+                    {% endfor %}
+                </div>
+            </div>
         <button class="btn btn-info " style="margin-top: 25px;">{{ button_label|default('Save Edit') }}</button>
     {{ form_end(form,{render_rest: false}) }}
 

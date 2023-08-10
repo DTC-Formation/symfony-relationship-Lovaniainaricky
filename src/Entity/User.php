@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -16,16 +17,19 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("listing")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("listing","creating")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("listing","creating")
      */
     private $prenom;
 
@@ -36,11 +40,13 @@ class User
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups("listing")
      */
     private $CIN;
 
     /**
      * @ORM\Column(type="string", length=1050, nullable=true)
+     * @Groups("listing","creating")
      */
     private $adresse;
 
@@ -56,16 +62,19 @@ class User
 
     /**
      * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="user")
+     * @Groups("listing","creating")
      */
     private $experiences;
 
     /**
      * @ORM\OneToMany(targetEntity=Etudes::class, mappedBy="user", orphanRemoval=true)
+     * @Groups("listing","creating")
      */
     private $etudes;
 
     /**
      * @ORM\OneToOne(targetEntity=Contact::class, mappedBy="user", cascade={"persist", "remove"})
+     * @Groups("listing","creating")
      */
     private $contact;
 

@@ -4,39 +4,81 @@
 
 {% block body %}
     <h1>User</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ user.age }}</td>
-            </tr>
-            <tr>
-                <th>CIN</th>
-                <td>{{ user.CIN }}</td>
-            </tr>
-            <tr>
-                <th>adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
-                <th>adresse</th>
-                <td>{{ user.height }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-sm-6">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prenom</th>
+                    <td>{{ user.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>{{ user.age }}</td>
+                </tr>
+                <tr>
+                    <th>CIN</th>
+                    <td>{{ user.CIN }}</td>
+                </tr>
+                <tr>
+                    <th>adresse</th>
+                    <td>{{ user.adresse }}</td>
+                </tr>
+                <tr>
+                    <th>Longueur</th>
+                    <td>{{ user.height }}</td>
+                </tr>
+                <tr>
+                    <th>Poids</th>
+                    <td>{{ user.weight }}</td>
+                </tr>
+                {# COntact #}
+                <tr>
+                    <th>Tél : </th>
+                    <td>{{ user.contact.telephone }}</td>
+                </tr>
+                <tr>
+                    <th>eMail : </th>
+                    <td>{{ user.contact.mail }}</td>
+                </tr>
+                <tr>
+                    <th>LinkedIn : </th>
+                    <td>{{ user.contact.linkedIn }}</td>
+                </tr>
+                <tr>
+                    <th>Etudes : </th>
+                    <td>
+                        <ul>
+                            {% for etude in user.etudes %}
+                                <li>{{ etude.Post }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Experiences : </th>
+                    <td>
+                        <ul>
+                            {% for experience in user.experiences %}
+                                <li>{{ experience.Post }}</li>
+                                <li>{{ experience.startDate|date('d/m/Y') }}</li>
+                                <li>{{ experience.endDate|date('d/m/Y') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+    </div>
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 

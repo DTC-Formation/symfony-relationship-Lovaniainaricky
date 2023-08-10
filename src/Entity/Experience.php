@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ExperienceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
@@ -19,16 +20,19 @@ class Experience
 
     /**
      * @ORM\Column(type="date")
+     * @Groups("listing","creating")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("listing","creating")
      */
     private $EndDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("listing","creating")
      */
     private $Post;
 

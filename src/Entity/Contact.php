@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ContactRepository::class)
@@ -19,6 +20,7 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
+     * @Groups("listing")
      */
     private $telephone;
 
